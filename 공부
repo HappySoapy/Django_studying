@@ -21,3 +21,8 @@ cmd창) django-admin startapp board
 * project vs app
 project : 하나의 프로그램이라 보면 됨
 app : 묶음단위로 나타낼 수 있는 것(사용자 이름 생성/제거 등을 하는 것...?)
+
+5. templates 폴더 생성
+vsstudio에서 board 폴더 안에 templates 폴더 생성(mtv 생성 완료)
+
+
