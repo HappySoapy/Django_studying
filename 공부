@@ -1,0 +1,4 @@
+# 1일차
+[vsstudio에 가상환경 설치하고 만들기(window 환경)]
+강사님은 바로 vsstudio 터미널에 서가상환경 설치한 후 activate 하셨지만 내컴은 보안문제로 오류뜸.
+cmd창을 관리자 권한으로 열어서 fcdjango_venv\Scripts\activate 하니까 됨.
