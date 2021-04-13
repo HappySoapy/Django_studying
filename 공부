@@ -25,7 +25,7 @@ app : 묶음단위로 나타낼 수 있는 것(사용자 이름 생성/제거 �
 5. templates 폴더 생성
 vsstudio에서 board 폴더 안에 templates 폴더 생성(mtv 생성 완료)
 
-
+===========================================================================================================================
 # 2일차
 [새로운 앱 만들기(fcuser)]
 ## fcdjango_venv 활성화
@@ -39,7 +39,7 @@ vsstudio에서 board 폴더 안에 templates 폴더 생성(mtv 생성 완료)
 
 ## 템플릿 생성 후 settings에서 fcuser 넣어줘야 함.
 
-
+**************************************************************************************************************************
 [새로운 모델 만들기(로그인 페이지 만들기)]
 1. fcuser 앱의 templates에서 models.py를 연다.
 2. 다음과 같이 코딩한다.
@@ -61,6 +61,7 @@ class Fcuser(models.Model):
         # 앱들과 테이블명 구분하기 위해서
         db_table = 'Fastcampus_fcuser'
 
+
 3. 이렇게 만든 것은 makemigrations를 입력하면 우리가 만든 테이블을 볼 수 있다.
 (cmd창) python manage.py makemigrations
 이렇게 하면 다음과 같이 뜬다.
@@ -68,7 +69,6 @@ class Fcuser(models.Model):
               Migrations for 'fcuser':
                 fcuser\migrations\0001_initial.py
                   - Create model Fcuser
-                  
                   
 **** fcuser\migrations\0001_initial.py 파일에 들어가면 다음과 같이 자동으로 만들어져서 나온다 ****
 
@@ -151,6 +151,56 @@ class Fcuser(models.Model):
 
       CREATE TABLE IF NOT EXISTS "Fastcampus_fcuser" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, 
       "username" varchar(64) NOT NULL, "password" varchar(64) NOT NULL, "registered_dttm" datetime NOT NULL);
+
+
+7. 변경사항을 입력한다면 위의 3, 4번을 반복하면 자동 업데이트가 되면서 
+** fcuser\migrations\0001_initial.py ** 에서 0001 -> 0002 이런식으로 새로 생성하게 된다.
+
+*************************************************************************************************************************
+[Django admin에 들어가기]
+1. 다음 코드를 입력
+(cmd창) python manage.py runserver 
+
+**** 이렇게 뜸 ****
+
+            Watching for file changes with StatReloader
+            Performing system checks...
+
+            System check identified no issues (0 silenced).
+            April 13, 2021 - 11:16:16
+            Django version 3.2, using settings 'fc_community.settings'
+            Starting development server at http://127.0.0.1:8000/
+            Quit the server with CTRL-BREAK.
+            
+위의 코드에서 http://127.0.0.1:8000/ 을 복사한 후에 뒤에 admin을 붙여준다. 즉,
+** http://127.0.0.1:8000/admin ** 을 주소창에 입력한다.
+
+2. superuser 입력하기
+(cmd창) python manage.py createsuperuser
+입력 후에 아이디, 이메일, 비밀번호 입력하기(비밀번호는 창에서 안보이게 검은색으로 뜨므로 당황하지 말자)
+
+***************************************************************************************************************************
+[Django admin 페이지에 내가 만든 테이블 추가하기]
+1. admin.py를 연다.
+2. 다음과 같이 입력한다.
+
+        # fcuser를 models에서 임포트 한다.
+        from .models import Fcuser
+        
+        # 빈 클래스를 하나 만든다.
+        class FcuserAdmin(admin.ModelAdmin):
+            pass
+        
+        # Fcuser라는 테이블을 django에 추가한다.
+        admin.site.register(Fcuser, FcuserAdmin)
+
+<<< Django admin을 사용할 때 장점 >>>
+SQL로 작성하기 힘든데 이 페이지에 들어가서 편리하게 추가, 삭제, 변경가능하다.
+
+***************************************************************************************************************************
+[Django admin 페이지 커스터마이징하기]
+
+
 
 
 
