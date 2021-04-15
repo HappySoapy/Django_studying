@@ -37,8 +37,15 @@
 10. 다른 모든 것들 migrate 시키기 : python manage.py migrate
 11. Django admin에 들어가보기 : python manage.py runserver
      -> port : http://127.0.0.1:8000/admin/   => 이렇게 하면 관리자 페이지가 나옴
+12. Superuser 만들기
+12. django 관리자 페이지랑 우리가 만든 앱(fcuser) 연결하기 : admin.py를 연다.
+     -> from .models import Fcuser를 입력
+     -> Fcuseradmin 클래스 만들기
+     **** 코드 ****
+     class Fcuseradmin(admin.ModelAdmin):
+         pass    # 비워둔다는 뜻
      
-12. 
+     admin.site.register(Fcuser, Fcuseradmin)
 
 
 
