@@ -33,6 +33,8 @@
 6. settings.py에서 INSTALLED_APPS에 'fcuser' 넣기(넣어야 이 앱 사용가능함)
 7. models.py에서 Fcuser 클래스 만들기(인자는 models.Model이다. 여기에서 만드는게 자동으로 sql로 바뀔 수 있음. 이것이 프레임워크의 장점)
 8. 테이블명 지정하려면 위의 클래스 안에 class Meta를 써서 테이블명 지정
+9. 만든 테이블 migration 시키기 : python manage.py makemigrations
+10. 다른 모든 것들 migrate 시키기 : python manage.py migrate
 
 
 
