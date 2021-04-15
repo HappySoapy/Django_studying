@@ -1,1 +1,21 @@
+### vscode terminal창에서 관리자 권한으로 실시해도 에러가 계속 났는데, 블로그를 찾아서 해결했다. ###
 
+  **** 에러 내용 ****
+    error message
+
+    webpack : 이 시스템에서 스크립트를 실행할 수 없으므로 C:\Users\shimk\AppData\Roaming\npm\webpack.ps1 파일을 로드할 수 없습니다. 
+    자세한 내용은 about_Execution_Policies(https://go.microsoft.com/fwlink/?LinkID=135170)를 참조
+    하십시오.
+    위치 줄:1 문자:1
+    + webpack
+    + ~~~~~~~
+        + CategoryInfo          : 보안 오류: (:) [], PSSecurityException
+        + FullyQualifiedErrorId : UnauthorizedAccess
+        
+-> 해결방법(참고 블로글 : https://dog-developers.tistory.com/183)
+1. windows PowerShell 프로그램을 관리자 권한으로 실행
+2. Get-ExecutionPolicy 명령어를 작성
+3. 권한이 RemoteSigned 가 아니라면 Set-ExecutionPolicy RemoteSigned 를 입력
+    => 실행 규칙 변경을 y(예)로 입력한다.
+4. Get-ExecutionPolicy 명령어로 다시 한번 확인 하면 RemoteSigned로 변경 확인
+5. vscode 터미널창에서 확인
