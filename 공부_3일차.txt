@@ -35,7 +35,10 @@
 8. 테이블명 지정하려면 위의 클래스 안에 class Meta를 써서 테이블명 지정
 9. 만든 테이블 migration 시키기 : python manage.py makemigrations
 10. 다른 모든 것들 migrate 시키기 : python manage.py migrate
-
+11. Django admin에 들어가보기 : python manage.py runserver
+     -> port : http://127.0.0.1:8000/admin/   => 이렇게 하면 관리자 페이지가 나옴
+     
+12. 
 
 
 
