@@ -19,3 +19,22 @@
     => 실행 규칙 변경을 y(예)로 입력한다.
 4. Get-ExecutionPolicy 명령어로 다시 한번 확인 하면 RemoteSigned로 변경 확인
 5. vscode 터미널창에서 확인
+
+********************************************************************************************************************************
+
+* 앞으로도 작업해야 할 일이 많을 듯 한데, 전공자가 아닌 나로서는 url연결 등 헷갈리는 게 너무 많아서 그 순서를 기록하고자 한다.
+
+[Django 만드는 순서 정리]
+1. 가상환경 만들기 : python -m venv project_name
+2. django 임포트 : import django
+3. 프로젝트 만들기 : django-admin startproject fc_community
+4. 앱 만들기 :  cd fc_community로 fc_community 파일로 들어간 후, django-admin startapp fcuser
+5. 탬플릿 만들기 : fcuser에서 새폴터 만들기 -> templates 폴더 만듦
+6. settings.py에서 INSTALLED_APPS에 'fcuser' 넣기(넣어야 이 앱 사용가능함)
+7. models.py에서 Fcuser 클래스 만들기(인자는 models.Model이다. 여기에서 만드는게 자동으로 sql로 바뀔 수 있음. 이것이 프레임워크의 장점)
+8. 테이블명 지정하려면 위의 클래스 안에 class Meta를 써서 테이블명 지정
+
+
+
+
+
