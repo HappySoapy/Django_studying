@@ -37,8 +37,8 @@
 10. 다른 모든 것들 migrate 시키기 : python manage.py migrate
 11. Django admin에 들어가보기 : python manage.py runserver
      -> port : http://127.0.0.1:8000/admin/   => 이렇게 하면 관리자 페이지가 나옴
-12. Superuser 만들기
-12. django 관리자 페이지랑 우리가 만든 앱(fcuser) 연결하기 : admin.py를 연다.
+12. Superuser 만들기 : python manage.py createsuperuser
+13. django 관리자 페이지랑 우리가 만든 앱(fcuser) 연결하기 : admin.py를 연다.
      -> from .models import Fcuser를 입력
      -> Fcuseradmin 클래스 만들기
      **** 코드 ****
@@ -46,7 +46,93 @@
          pass    # 비워둔다는 뜻
      
      admin.site.register(Fcuser, Fcuseradmin)
+     
+*********************************************************************************************************************************
 
+[Admin 페이지 커스터마이징하기 - 1. def __str__(self) 함수를 이용해 username이 비춰지도록 하기]
+'''
+ 우리가 생성한 테이블로 들어가면 사용자명이 밖에 비춰지는 게 아니라 Fcuser object(1) 이런 식으로 표현된다. 그이유는 아래와 같다.
+ Django에서 표시된 문구는 클래스를 문자열로 변환했을 때 나오는 값이다. 
+ python에는 클래스가 문자열로 변환될 때 어떻게 변환할 지 바꿀 수 있는 클래스가 내장되어있다. 그게 아래의 [__str__] 함수임.
+ 이를 이용하면 username이 보이게 된다. 
+ 만약 self.password를 입력하면 비밀번호가 우리 눈에 보인다.
+ '''
+    **** 코드 ****
+    def __str__(self):
+        return self.username                                 
 
+[Admin 페이지 커스터마이징하기 - 2. 우리가 보고싶은 정보 보이기]
+1. admin.py에 들어간다.
+2. Fcuseradmin 클래스에 다음과 같이 입력한다.
+    **** 코드 ****
+    class Fcuseradmin(admin.ModelAdmin):
+    list_display = ('username', 'password')
+    
+[Admin 페이지 커스터마이징하기 - 3. 테이블명 보기 편하게 변경하기]
+1. models.py에 들어간다.
+2. Meta 클래스에서 변경한다. 
+    **** 코드 ****
+    class Meta:
+    #  테이블명 지정
+    db_table = 'fastcampus_fcuser'
+    # 우리가 보기 편하게 이름 바꾸기(verbose_name : 우리가 볼 이름)
+    verbose_name = '패스트캠퍼스 사용자'
+    # django에서는 복수형으로 보여주기 때문에 이를 똑같이 지정해준다.
+    verbose_name_plural = '패스트캠퍼스 사용자'
+    
+*********************************************************************************************************************************
+[부트스트랩을 이용해서 회원가입 페이지 만들기]
+0. !를 입력한 후 tab을 누르면 html 형식이 자동완성된다.
+1. 부트스트랩 4.3 버전에 들어간다(https://getbootstrap.com/docs/4.3/getting-started/introduction/)
+2. CSS, JS에 있는 내용을 복사해온다.
+3. body에 div.container를 입력한다.
+4. 그 밑에 div.row를 입력한다.
 
+==> 말로하려니 힘들다. 그냥 코드 보자.
 
+    **** 코드 ****
+    <body>
+      <div class="container">
+          <div class="row mt-5">
+              <div class="col-12 text-center">
+                  <h1>회원가입</h1>
+              </div>
+          </div>
+          <div class="row mt-5">
+              <div class="col-12">
+                  <form>
+                      <div class="form-group">
+                          <label for="username">사용자 이름</label>
+                          <input 
+                              type="text" 
+                              class="form-control" 
+                              id="username"  
+                              placeholder="사용자 이름"
+                              name = "username">
+                      </div>
+                      <div class="form-group">
+                          <label for="password">Password</label>
+                          <input 
+                          type="password" 
+                          class="form-control" 
+                          id="password" 
+                          placeholder="비밀번호"
+                          name = "password">
+                      </div>
+                      <div class="form-group">
+                          <label for="password">Password check</label>
+                          <input 
+                              type="password" 
+                              class="form-control" 
+                              id="re-password" 
+                              placeholder="비밀번호확인"
+                              name = "re-password">
+                      </div>
+                      <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                 </div>
+              </div>
+           </div>
+       </body>
+    
+    
